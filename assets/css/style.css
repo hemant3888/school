@@ -252,7 +252,7 @@ header .icon .btn-primary:active:hover{
 }
 .slideshow img{
 	width:100%;
-	min-height:500px;
+	max-height:700px;
 }
 .slide-detail{
 	left: 0;

@@ -71,10 +71,8 @@ BOOTSTRAP 3.3.5 VERSION
         color: #777;
     }
 
-    /* SLIDER SECTION */
-
     .state-slider-section {
-        padding-top: 70px;
+        padding: 70px 0;
     }
 
     .section-title {
@@ -91,17 +89,16 @@ BOOTSTRAP 3.3.5 VERSION
     .section-title h2 {
         font-size: 42px;
         font-weight: 700;
-        margin-top: 15px;
-        color: #0b1f3a;
+        margin-top: 10px;
     }
 
+    /* CARD */
     .state-card {
         background: #fff;
         border-radius: 20px;
-        padding: 35px 20px;
+        padding: 30px 20px;
         text-align: center;
         box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-        margin: 15px;
         transition: 0.3s;
     }
 
@@ -123,14 +120,12 @@ BOOTSTRAP 3.3.5 VERSION
 
     .state-card h4 {
         margin-top: 20px;
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 700;
-        color: #0b1f3a;
     }
 
     .state-card p {
         color: #777;
-        margin: 15px 0;
     }
 
     .state-card a {
@@ -139,60 +134,32 @@ BOOTSTRAP 3.3.5 VERSION
         text-decoration: none;
     }
 
-    /* Carousel arrows */
-
-    .carousel-control.left,
-    .carousel-control.right {
-        background-image: none !important;
-        width: 50px;
-        height: 50px;
-        background: #f97316 !important;
-        border-radius: 50%;
-        top: 50%;
-        transform: translateY(-50%);
-        opacity: 1;
+    /* SWIPER */
+    .swiper {
+        padding-bottom: 50px;
     }
 
-    .carousel-control i {
-        position: absolute;
-        top: 14px;
-        left: 18px;
-        font-size: 22px;
+    .swiper-slide {
+        display: flex;
+        justify-content: center;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        background: #f97316;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 18px;
         color: #fff;
     }
 
-    .carousel-control.left {
-        left: -20px;
-    }
-
-    .carousel-control.right {
-        right: -20px;
-    }
-
-    .carousel-control .glyphicon {
-        top: 14px;
-    }
-
-    @media(max-width:768px) {
-
-        .franchise-content {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .franchise-content h2 {
-            font-size: 32px;
-            line-height: 45px;
-        }
-
-        .section-title h2 {
-            font-size: 30px;
-        }
-
-        .carousel-control.left,
-        .carousel-control.right {
-            display: none;
-        }
+    .swiper-pagination-bullet {
+        background: #f97316;
     }
 </style>
 
@@ -239,170 +206,51 @@ BOOTSTRAP 3.3.5 VERSION
         </div>
 
         <!-- SLIDER SECTION -->
-        <div class="state-slider-section">
+        <?php
+        include 'includes/config.php';
+        $query = mysqli_query($conn, "
+    SELECT state, COUNT(*) as total 
+    FROM center 
+    GROUP BY state
+");
+        ?>
+
+        <div class="container state-slider-section">
 
             <div class="section-title">
                 <span>Our Presence</span>
                 <h2>Our Franchisee Across States</h2>
             </div>
 
-            <div id="stateSlider" class="carousel slide" data-ride="carousel">
+            <div class="swiper myStateSwiper">
+                <div class="swiper-wrapper">
 
-                <div class="carousel-inner">
+                    <?php while ($row = mysqli_fetch_assoc($query)): ?>
+                        <div class="swiper-slide">
+                            <div class="state-card">
 
-                    <!-- SLIDE 1 -->
-                    <div class="item active">
-
-                        <div class="row">
-
-                            <div class="col-md-4">
-
-                                <div class="state-card">
-
-                                    <div class="state-circle">
-                                        UK
-                                    </div>
-
-                                    <h4>Uttarakhand</h4>
-
-                                    <p>Total Centers : 44</p>
-
-                                    <a href="state-details.php?id=1">
-                                        View Franchisee
-                                    </a>
-
+                                <div class="state-circle">
+                                    <?= strtoupper(substr($row['state'], 0, 2)); ?>
                                 </div>
 
-                            </div>
+                                <h4><?= $row['state']; ?></h4>
 
-                            <div class="col-md-4">
+                                <p>Total Centers : <?= $row['total']; ?></p>
 
-                                <div class="state-card">
-
-                                    <div class="state-circle">
-                                        UP
-                                    </div>
-
-                                    <h4>Uttar Pradesh</h4>
-
-                                    <p>Total Centers : 67</p>
-
-                                    <a href="state-details.php?id=2">
-                                        View Franchisee
-                                    </a>
-
-                                </div>
+                                <a href="franchisee-detail.php?state=<?= urlencode($row['state']); ?>">
+                                    View Franchisee
+                                </a>
 
                             </div>
-
-                            <div class="col-md-4">
-
-                                <div class="state-card">
-
-                                    <div class="state-circle">
-                                        RJ
-                                    </div>
-
-                                    <h4>Rajasthan</h4>
-
-                                    <p>Total Centers : 29</p>
-
-                                    <a href="state-details.php?id=3">
-                                        View Franchisee
-                                    </a>
-
-                                </div>
-
-                            </div>
-
                         </div>
-
-                    </div>
-
-
-                    <!-- SLIDE 2 -->
-                    <div class="item">
-
-                        <div class="row">
-
-                            <div class="col-md-4">
-
-                                <div class="state-card">
-
-                                    <div class="state-circle">
-                                        HR
-                                    </div>
-
-                                    <h4>Haryana</h4>
-
-                                    <p>Total Centers : 33</p>
-
-                                    <a href="state-details.php?id=4">
-                                        View Franchisee
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4">
-
-                                <div class="state-card">
-
-                                    <div class="state-circle">
-                                        PB
-                                    </div>
-
-                                    <h4>Punjab</h4>
-
-                                    <p>Total Centers : 18</p>
-
-                                    <a href="state-details.php?id=5">
-                                        View Franchisee
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-4">
-
-                                <div class="state-card">
-
-                                    <div class="state-circle">
-                                        DL
-                                    </div>
-
-                                    <h4>Delhi</h4>
-
-                                    <p>Total Centers : 25</p>
-
-                                    <a href="state-details.php?id=6">
-                                        View Franchisee
-                                    </a>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
+                    <?php endwhile; ?>
 
                 </div>
 
-                <!-- CONTROLS -->
-                <a class="left carousel-control" href="#stateSlider" data-slide="prev">
-
-                    <i class="fa fa-angle-left"></i>
-
-                </a>
-
-                <a class="right carousel-control" href="#stateSlider" data-slide="next">
-
-                    <i class="fa fa-angle-right"></i>
-
-                </a>
+                <!-- controls -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
 
             </div>
 

@@ -1,324 +1,292 @@
 <?php include 'header.php'; ?>
 
+<?php
+include 'includes/config.php';
+
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
+$state = mysqli_real_escape_string($conn, $_GET['state']);
+
+$query = mysqli_query($conn, "
+    SELECT * FROM center WHERE state='$state'
+");
+
+if(!$query){
+    die("Query Failed: " . mysqli_error($conn));
+}
+?>
 
 
-<!-- =====================================
-STATE FRANCHISEE PAGE DESIGN
-BOOTSTRAP 3.3.5 + OWL CAROUSEL
-====================================== -->
 
 <style>
-    .state-page {
-        background: #eef5ff;
-        padding: 70px 0;
-        position: relative;
-        overflow: hidden;
+    :root {
+
+        --orange: #ff7a00;
+        --dark: #1f2937;
+        --light: #fff7f0;
+
     }
 
-    .state-heading h2 {
-        font-size: 42px;
-        font-weight: 700;
-        color: #0b1f3a;
-        margin-bottom: 10px;
-    }
+    /* TABLE */
 
-    .breadcrumb-custom {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
+    .table-wrap {
 
-    .breadcrumb-custom li {
-        display: inline-block;
-        color: #777;
-        font-size: 16px;
-    }
-
-    .breadcrumb-custom li a {
-        color: #f97316;
-        text-decoration: none;
-    }
-
-    .breadcrumb-custom li:after {
-        content: ">";
-        margin: 0 10px;
-    }
-
-    .breadcrumb-custom li:last-child:after {
-        display: none;
-    }
-
-    .search-box {
-        position: relative;
-    }
-
-    .search-box input {
-        width: 100%;
-        height: 55px;
-        border: none;
-        border-radius: 12px;
-        padding: 0 50px 0 20px;
-        font-size: 16px;
-        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
-    }
-
-    .search-box i {
-        position: absolute;
-        right: 18px;
-        top: 18px;
-        color: #999;
-        font-size: 18px;
-    }
-
-    .instruction {
-        margin-top: 15px;
-        text-align: right;
-        color: #555;
-        font-size: 15px;
-    }
-
-    /* Franchise Card */
-
-    .franchise-slider {
-        margin-top: 70px;
-    }
-
-    .franchise-card {
         background: #fff;
-        border-radius: 20px;
-        padding: 40px 25px;
-        text-align: center;
-        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.06);
-        transition: 0.4s;
-        margin: 10px;
-        min-height: 230px;
-    }
 
-    .franchise-card:hover {
-        transform: translateY(-10px);
-    }
+        border-radius: 25px;
 
-    .franchise-card h3 {
-        font-size: 30px;
-        line-height: 42px;
-        color: #f97316;
-        font-weight: 700;
+        padding: 15px;
+
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+
+        margin-top: 20px;
         margin-bottom: 20px;
+
+        position: relative;
+
+        z-index: 10;
+
     }
 
-    .franchise-card h4 {
-        font-size: 24px;
-        color: #333;
-        font-weight: 600;
-        margin-bottom: 20px;
+    .table {
+
+        margin: 0;
+
+        border-collapse: separate;
+
+        border-spacing: 0 12px;
+
     }
 
-    .franchise-code {
-        display: inline-block;
-        background: #f97316;
+    .table thead th {
+
+        background: linear-gradient(135deg, var(--orange), #ff9b3d);
+
         color: #fff;
-        padding: 10px 22px;
-        border-radius: 50px;
-        font-weight: 600;
-        font-size: 14px;
+
+        padding: 18px;
+
+        border: none;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
     }
 
-    /* Owl Buttons */
+    .table thead th:first-child {
 
-    .owl-nav {
-        text-align: center;
-        margin-top: 40px;
+        border-radius: 15px 0 0 15px;
+
     }
 
-    .owl-prev,
-    .owl-next {
-        width: 55px;
-        height: 55px;
-        background: #f97316 !important;
-        border-radius: 50% !important;
-        color: #fff !important;
-        font-size: 22px !important;
-        line-height: 55px !important;
-        margin: 0 10px;
+    .table thead th:last-child {
+
+        border-radius: 0 15px 15px 0;
+
+    }
+
+    .table tbody tr {
+
+        background: #fffaf5;
+
         transition: 0.3s;
+
     }
 
-    .owl-prev:hover,
-    .owl-next:hover {
-        background: #f97316 !important;
+    .table tbody tr:hover {
+
+        transform: translateY(-3px);
+
+        box-shadow: 0 10px 20px rgba(255, 122, 0, 0.12);
+
     }
 
-    .owl-dots {
-        display: none;
+    .table tbody td {
+
+        padding: 14px;
+
+        vertical-align: middle;
+
+        border-top: none;
+
+        border-bottom: none;
+
+        font-size: 12px;
+
+        color: #374151;
+
     }
 
-    /* Decorative */
+    .table tbody td:first-child {
 
-    .dots-design {
-        position: absolute;
-        left: 20px;
-        top: 200px;
-        width: 120px;
-        height: 120px;
-        background-image: radial-gradient(#f97316 2px, transparent 2px);
-        background-size: 15px 15px;
-        opacity: 0.6;
+        border-radius: 14px 0 0 14px;
+
+        font-weight: 700;
+
+        color: var(--orange);
+
     }
+
+    .table tbody td:last-child {
+
+        border-radius: 0 14px 14px 0;
+
+    }
+
+    /* BADGES */
+
+    .badge-duration {
+
+        background: #fff1e6;
+
+        color: var(--orange);
+
+        padding: 5px 10px;
+
+        border-radius: 30px;
+
+        font-weight: 600;
+
+        display: inline-flex;
+
+        align-items: center;
+
+    }
+
+    .badge-level {
+
+        background: linear-gradient(135deg, var(--orange), #ff9b3d);
+
+        color: #fff;
+
+        padding: 5px 10px;
+
+        border-radius: 30px;
+
+        font-weight: 600;
+
+    }
+
+    /* MOBILE */
 
     @media(max-width:768px) {
 
-        .state-heading h2 {
-            font-size: 32px;
+        .page-hero {
+
+            padding: 30px 10px 36px;
+
         }
 
-        .instruction {
-            text-align: left;
+        .page-hero h1 {
+
+            font-size: 15px;
+
         }
 
-        .franchise-card h3 {
-            font-size: 22px;
-            line-height: 34px;
+        .dept-hero-icon {
+
+            width: 70px;
+            height: 70px;
+
+            font-size: 28px;
+
         }
 
-        .franchise-card h4 {
-            font-size: 20px;
+        .table-wrap {
+
+            padding: 15px;
+
+        }
+
+        .table thead th,
+        .table tbody td {
+
+            font-size: 14px;
+
+            padding: 12px;
+
         }
 
     }
 </style>
 
-<section class="state-page">
 
-    <div class="dots-design"></div>
+<section class="content-section">
 
     <div class="container">
 
-        <div class="row">
+        <!-- TABLE -->
 
-            <!-- LEFT -->
-            <div class="col-md-6">
+        <div class="table-wrap">
+<h3>Center Available in <?= ucfirst($state) ?></h3>
+           <div class="table-responsive">
+    <table class="table table-striped" id="courseTable">
 
-                <div class="state-heading">
+                    <thead>
 
-                    <!-- Dynamic State Name -->
-                    <h2>
-                        Franchisee under
-                        <!-- <?php echo urldecode($_GET['state']); ?> -->
-                    </h2>
+                        <tr>
 
-                    <ul class="breadcrumb-custom">
+                            <th>S.No</th>
 
-                        <li>
-                            <a href="index.php">Home</a>
-                        </li>
+                            <th>Center Name</th>
+                            <th>Address</th>
+                            <th>Mobile</th>
 
-                        <li>
-                            Franchisee
-                        </li>
+                        </tr>
 
-                    </ul>
+                    </thead>
 
-                </div>
+                    <tbody>
 
-            </div>
+                        <?php
+                        if (mysqli_num_rows($query) > 0):
+                            $i = 1;
+                            while ($row = mysqli_fetch_assoc($query)):
+                        ?>
 
-            <!-- RIGHT -->
-            <div class="col-md-6">
+                                <tr>
 
-                <div class="search-box">
+                                    <td class="sno-cell">
+                                        <?= $i++; ?>
+                                    </td>
 
-                    <input type="text" placeholder="Search with Name or City">
+                                    <td class="course-name-cell">
+                                        <?= $row['center_name']; ?>
+                                    </td>
 
-                    <i class="fa fa-search"></i>
+                                    <td>
+                                        <span class="badge-duration">
+                                            <i class="bi bi-geo-alt me-1"></i>
+                                            <?= $row['address']; ?>
+                                        </span>
+                                    </td>
 
-                </div>
+                                    <td>
+                                        <span class="badge-level level-beginner">
+                                            <?= $row['mobile']; ?>
+                                        </span>
+                                    </td>
 
-                <div class="instruction">
-                    Instruction :
-                </div>
+                                </tr>
 
-            </div>
+                            <?php
+                            endwhile;
+                        else:
+                            ?>
 
-        </div>
+                            <tr>
+                                <td colspan="4" class="text-center text-danger py-4">
+                                    No Franchisee Found
+                                </td>
+                            </tr>
 
-        <!-- SLIDER -->
-        <div class="franchise-slider">
+                        <?php endif; ?>
 
-            <div class="owl-carousel franchise-carousel">
+                    </tbody>
 
-                <!-- CARD -->
-                <div class="item">
-
-                    <div class="franchise-card">
-
-                        <h3>GIIT Computer Institute</h3>
-
-                        <h4>Un</h4>
-
-                        <span class="franchise-code">
-                            UP-UNN-00-277
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <!-- CARD -->
-                <div class="item">
-
-                    <div class="franchise-card">
-
-                        <h3>
-                            Kalkhaji Institute Of Technical Education
-                        </h3>
-
-                        <h4>Moradabad</h4>
-
-                        <span class="franchise-code">
-                            UP-MOR-00-304
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <!-- CARD -->
-                <div class="item">
-
-                    <div class="franchise-card">
-
-                        <h3>
-                            Globel Educational & Career Consultancy Services
-                        </h3>
-
-                        <h4>Khatauli</h4>
-
-                        <span class="franchise-code">
-                            UP-KHA-00-362
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <!-- CARD -->
-                <div class="item">
-
-                    <div class="franchise-card">
-
-                        <h3>
-                            Smart Computer Institute
-                        </h3>
-
-                        <h4>Lucknow</h4>
-
-                        <span class="franchise-code">
-                            UP-LKO-00-455
-                        </span>
-
-                    </div>
-
-                </div>
+                </table>
 
             </div>
 
@@ -328,48 +296,6 @@ BOOTSTRAP 3.3.5 + OWL CAROUSEL
 
 </section>
 
-<script>
-    $(document).ready(function() {
-
-        $('.franchise-carousel').owlCarousel({
-
-            loop: true,
-
-            margin: 20,
-
-            nav: true,
-
-            dots: false,
-
-            autoplay: true,
-
-            autoplayTimeout: 3000,
-
-            navText: [
-                "<i class='fa fa-arrow-left'></i>",
-                "<i class='fa fa-arrow-right'></i>"
-            ],
-
-            responsive: {
-
-                0: {
-                    items: 1
-                },
-
-                600: {
-                    items: 2
-                },
-
-                1000: {
-                    items: 3
-                }
-
-            }
-
-        });
-
-    });
-</script>
 
 
 

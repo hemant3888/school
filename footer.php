@@ -198,6 +198,39 @@
 		});
 	</script>
 	<script>
+		var swiper = new Swiper(".myStateSwiper", {
+			loop: true,
+			spaceBetween: 20,
+
+			autoplay: {
+				delay: 2500,
+				disableOnInteraction: false,
+			},
+
+			navigation: {
+				nextEl: ".swiper-button-next",
+				prevEl: ".swiper-button-prev",
+			},
+
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+
+			breakpoints: {
+				0: {
+					slidesPerView: 1
+				},
+				576: {
+					slidesPerView: 2
+				},
+				992: {
+					slidesPerView: 3
+				}
+			}
+		});
+	</script>
+	<script>
 		$('#stateSlider').carousel({
 			interval: 2000
 		});

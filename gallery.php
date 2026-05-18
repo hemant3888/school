@@ -96,91 +96,35 @@ include 'header.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- gallery section  -->
+<?php
+include 'includes/config.php';
+$query = mysqli_query($conn, "SELECT * FROM gallery ORDER BY id DESC");
+?>
+
 <div class="gallery_container">
   <div class="popup-gallery">
-    <div class="gallery_item">
-      <a class="hover_affect_nlf position-relative" href="assets/images/gallery1.jpeg" title="Image 1">
-        <img src="assets/images/gallery1.jpeg" alt="Thumbnail 1">
-        <span class="singicon_btn_nlf">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
-        </span>
-      </a>
-    </div>
-    <div class="gallery_item">
-      <a class="hover_affect_nlf position-relative" href="assets/images/gallery2.jpeg" title="Image 2">
-        <img src="assets/images/gallery2.jpeg" alt="Thumbnail 2">
-        <span class="singicon_btn_nlf">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
-        </span>
-      </a>
-    </div>
-    <div class="gallery_item">
-      <a class="hover_affect_nlf position-relative" href="assets/images/gallery3.jpeg" title="Image 3">
 
-        <img src="assets/images/gallery3.jpeg" alt="Thumbnail 3">
-        <span class="singicon_btn_nlf">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
-        </span>
-      </a>
-    </div>
-    <div class="gallery_item">
-      <a class="hover_affect_nlf position-relative" href="assets/images/gallery4.jpeg" title="Image 4">
-        <img src="assets/images/gallery4.jpeg" alt="Thumbnail 4">
-        <span class="singicon_btn_nlf">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
-        </span>
-      </a>
-    </div>
-    <div class="gallery_item">
-      <a class="hover_affect_nlf position-relative" href="assets/images/2.jpeg" title="Image 4">
-        <img src="assets/images/2.jpeg" alt="Thumbnail 4">
-        <span class="singicon_btn_nlf">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
-        </span>
-      </a>
-    </div>
-    
-    
-    <div class="gallery_item">
-      <a class="hover_affect_nlf position-relative" href="assets/images/gallery6.jpeg" title="Image 4">
-        <img src="assets/images/gallery6.jpeg" alt="Thumbnail 4">
-        <span class="singicon_btn_nlf">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
-        </span>
-      </a>
-    </div>
-    <div class="gallery_item">
-      <a class="hover_affect_nlf position-relative" href="assets/images/gallery7.jpeg" title="Image 4">
-        <img src="assets/images/gallery7.jpeg" alt="Thumbnail 4">
-        <span class="singicon_btn_nlf">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
-        </span>
-      </a>
-    </div>
-    <div class="gallery_item">
-      <a class="hover_affect_nlf position-relative" href="assets/images/gallery8.jpeg" title="Image 4">
-        <img src="assets/images/gallery8.jpeg" alt="Thumbnail 4">
-        <span class="singicon_btn_nlf">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
-          </svg>
-        </span>
-      </a>
-    </div>
+    <?php while($row = mysqli_fetch_assoc($query)){ ?>
+
+      <div class="gallery_item">
+        <a class="hover_affect_nlf position-relative" 
+           href="admin/uploads/gallery/<?php echo $row['image']; ?>" 
+           title="Gallery Image">
+
+          <img src="admin/uploads/gallery/<?php echo $row['image']; ?>" 
+               alt="Gallery Image">
+
+          <span class="singicon_btn_nlf">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"/>
+            </svg>
+          </span>
+
+        </a>
+      </div>
+
+    <?php } ?>
+
   </div>
 </div>
 

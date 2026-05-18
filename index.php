@@ -45,21 +45,45 @@
     }
 }
 </style>
-<div class="slide">
-	<div class="slideshow owl-carousel">
-		<div class="item"><img src="assets/images/27.jpg" alt="banner" title="banner" class="img-responsive"></div>
-		<div class="item"><img src="assets/images/28.jpg" alt="banner" title="banner" class="img-responsive"></div>
-		<div class="item"><img src="assets/images/bb2.jpg" alt="banner" title="banner" class="img-responsive"></div>
-	</div>
-	<div class="slide-detail">
-		<div class="container">
-			<div class="matter">
-				<p class="text">Enlightening Future Through Education</p>
-				<h4>The Galaxy Institute of Information Technology</h4>
-				<p class="des">Join India’s leading education system with prestigious international affiliations, national memberships, and recognized MSME approvals for quality learning.</p>
-			</div>
-		</div>
-	</div>
+<?php
+include 'includes/config.php';
+$query = mysqli_query($conn, "SELECT * FROM slider ORDER BY id DESC");
+?>
+
+<div class="slide" style="max-height: 700px!important; overflow: hidden;">
+
+    <div class="slideshow owl-carousel">
+
+        <?php while($row = mysqli_fetch_assoc($query)){ ?>
+
+            <div class="item">
+                <img src="admin/uploads/slider/<?php echo $row['image']; ?>" 
+                     alt="banner" 
+                     class="img-responsive">
+            </div>
+
+        <?php } ?>
+
+    </div>
+
+   
+    <div class="slide-detail">
+        <div class="container">
+            <div class="matter">
+
+                <p class="text">Enlightening Future Through Education</p>
+
+                <h4>The Galaxy Institute of Information Technology</h4>
+
+                <p class="des">
+                    Join India’s leading education system with prestigious international affiliations,
+                    national memberships, and recognized MSME approvals for quality learning.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 <div class="service">
 	<div class="container">

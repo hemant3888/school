@@ -39,7 +39,7 @@ function sendMail($to,$subject,$body)
 
         $mail->setFrom(
             'hemantsaini5238@gmail.com',
-            'GIIT INDIA'
+            'TGIIT INDIA'
         );
 
         $mail->addAddress($to);

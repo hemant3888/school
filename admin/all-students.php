@@ -306,9 +306,15 @@
                                         <br>
 
                                         <button class="btn btn-success btn-sm" disabled>
-
                                             Generated
+                                        </button>
 
+
+                                        <button class="btn btn-warning btn-sm editEnrollment"
+                                            data-id="<?php echo $row['id']; ?>"
+                                            data-enroll="<?php echo $row['enroll_no']; ?>">
+
+                                            <i class="bi bi-pencil-square"></i>
                                         </button>
 
                                     <?php
@@ -319,9 +325,7 @@
                                             data-id="<?php echo $row['id']; ?>">
 
                                             <i class="bi bi-file-earmark-text"></i>
-
                                             Generate
-
                                         </button>
 
                                     <?php
@@ -330,11 +334,8 @@
                                     ?>
 
                                     <button class="btn btn-secondary btn-sm" disabled>
-
                                         <i class="bi bi-lock"></i>
-
                                         Locked
-
                                     </button>
 
                                 <?php
@@ -568,8 +569,10 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
 <script>
     $(document).on('click', '.generateEnrollment', function() {
 
@@ -692,6 +695,48 @@
             }
 
         });
+
+    });
+</script>
+<script>
+    $(document).on('click', '.editEnrollment', function() {
+
+        let id = $(this).data('id');
+        let currentEnroll = $(this).data('enroll');
+
+        let newEnroll = prompt("Edit Enrollment Number:", currentEnroll);
+
+        if (newEnroll != null && newEnroll != '') {
+
+            $.ajax({
+                url: 'db/update-enrollment.php',
+                type: 'POST',
+                data: {
+                    id: id,
+                    enroll_no: newEnroll
+                },
+                success: function(response) {
+
+                    if (response.trim() === 'success') {
+                        toastr.success("Enrollment Updated & Email Sent");
+                        location.reload();
+
+                    } else if (response.trim() === 'mail_failed') {
+                        toastr.warning("Updated but Email Failed");
+
+                    } else if (response.trim() === 'empty') {
+                        toastr.error("Enrollment cannot be empty");
+
+                    } else {
+                        toastr.error("Update Failed");
+                    }
+                },
+                error: function() {
+                    toastr.error("Server Error");
+                }
+            });
+
+        }
 
     });
 </script>

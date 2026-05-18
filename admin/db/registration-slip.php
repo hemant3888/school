@@ -84,6 +84,10 @@ $row = mysqli_fetch_assoc($query);
                             <th>Course</th>
                             <td><?php echo $row['course_name']; ?></td>
                         </tr>
+                        <tr>
+                            <th>Session</th>
+                            <td><?php echo $row['session']; ?></td>
+                        </tr>
 
                         <tr>
                             <th>Mobile</th>

@@ -211,6 +211,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         </ul>
       </li>
       <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#media" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-images"></i><span>Media</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="media" class="nav-content collapse " data-bs-parent="#banner">
+          <li>
+            <a href="all-gallery.php">
+              <i class="bi bi-circle"></i><span>Gallery</span>
+            </a>
+          </li>
+          <li>
+            <a href="all-slider.php">
+              <i class="bi bi-circle"></i><span>Slider</span>
+            </a>
+          </li>
+
+        </ul>
+      </li>
+      <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#center-request" data-bs-toggle="collapse" href="#">
           <i class="bi bi-building-add"></i><span>Center Request</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -218,6 +236,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
           <li>
             <a href="all-center-request.php">
               <i class="bi bi-circle"></i><span>All Center Request</span>
+            </a>
+          </li>
+
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#enquiry" data-bs-toggle="collapse" href="#">
+         <i class="bi bi-envelope"></i><span>Enquiry</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="enquiry" class="nav-content collapse " data-bs-parent="#enquiry">
+          <li>
+            <a href="all-enquiries.php">
+              <i class="bi bi-circle"></i><span>All Enquiries</span>
             </a>
           </li>
 
