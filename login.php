@@ -244,6 +244,7 @@
         <button class="btn btn-warning w-100" type="submit" id="loginBtn">
           Sign in
         </button>
+      <div class="mt-2">  <a href="forgot-password.php">Forgot Password?</a></div>
 
       </form>
 

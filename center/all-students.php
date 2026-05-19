@@ -261,6 +261,11 @@
                                     <i class="bi bi-trash"></i>
 
                                 </button>
+                                <button class="btn btn-info btn-sm editstudent" data-id="<?php echo $row['id']; ?>">
+
+                                     
+                                    <i class="bi bi-pencil"></i>
+                                </button>
 
                             </td>
 
@@ -475,7 +480,291 @@
     </div>
 
 </div>
+<!-- EDIT STUDENT MODAL -->
 
+<div class="modal fade" id="editStudentModal" tabindex="-1">
+
+    <div class="modal-dialog modal-xl">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Edit Student
+                </h5>
+
+                <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <form id="editStudentForm">
+
+                    <input type="hidden"
+                        name="student_id"
+                        id="edit_student_id">
+
+                    <div class="row">
+
+                        <!-- LEFT COLUMN -->
+
+                        <div class="col-md-6">
+
+                            <!-- STUDENT NAME -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Student Name
+                                </label>
+
+                                <input type="text"
+                                    name="stu_name"
+                                    id="edit_stu_name"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- FATHER NAME -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Father Name
+                                </label>
+
+                                <input type="text"
+                                    name="father_name"
+                                    id="edit_father_name"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- MOTHER NAME -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Mother Name
+                                </label>
+
+                                <input type="text"
+                                    name="mother_name"
+                                    id="edit_mother_name"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- MOBILE -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Mobile
+                                </label>
+
+                                <input type="text"
+                                    name="mobile"
+                                    id="edit_mobile"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- EMAIL -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Email
+                                </label>
+
+                                <input type="email"
+                                    name="email"
+                                    id="edit_email"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- DOB -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    DOB
+                                </label>
+
+                                <input type="date"
+                                    name="dob"
+                                    id="edit_dob"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- GENDER -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Gender
+                                </label>
+
+                                <select name="gender"
+                                    id="edit_gender"
+                                    class="form-control">
+
+                                    <option value="Male">Male</option>
+
+                                    <option value="Female">Female</option>
+
+                                    <option value="Other">Other</option>
+
+                                </select>
+
+                            </div>
+
+                        </div>
+
+                        <!-- RIGHT COLUMN -->
+
+                        <div class="col-md-6">
+
+                            <!-- QUALIFICATION -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Qualification
+                                </label>
+
+                                <input type="text"
+                                    name="qualification"
+                                    id="edit_qualification"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- FEES -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Fees
+                                </label>
+
+                                <input type="text"
+                                    name="fees"
+                                    id="edit_fees"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- SESSION -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Session
+                                </label>
+
+                                <input type="text"
+                                    name="session"
+                                    id="edit_session"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- STATE -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    State
+                                </label>
+
+                                <input type="text"
+                                    name="state"
+                                    id="edit_state"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- CITY -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    City
+                                </label>
+
+                                <input type="text"
+                                    name="city"
+                                    id="edit_city"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- PINCODE -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Pincode
+                                </label>
+
+                                <input type="text"
+                                    name="pincode"
+                                    id="edit_pincode"
+                                    class="form-control">
+
+                            </div>
+
+                            <!-- ADDRESS -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Address
+                                </label>
+
+                                <textarea
+                                    name="address"
+                                    id="edit_address"
+                                    rows="4"
+                                    class="form-control"></textarea>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="text-end">
+
+                        <button type="submit"
+                            class="btn btn-primary">
+
+                            <i class="bi bi-check-circle"></i>
+
+                            Update Student
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -515,6 +804,62 @@
         }
 
     });
+</script>
+<script>
+
+$(document).on('click', '.editstudent', function () {
+
+    let student_id = $(this).data('id');
+
+    $.ajax({
+
+        url: 'db/get-student.php',
+
+        type: 'POST',
+
+        data: {
+            student_id: student_id
+        },
+
+        success: function (response) {
+
+            let data = JSON.parse(response);
+
+            if (data.status == 'success') {
+
+                $('#edit_student_id').val(data.student.id);
+
+                $('#edit_stu_name').val(data.student.stu_name);
+
+                $('#edit_mobile').val(data.student.mobile);
+
+                $('#edit_email').val(data.student.email);
+                $('#edit_state').val(data.student.state);
+                $('#edit_city').val(data.student.city);
+                $('#edit_pincode').val(data.student.pincode);
+                $('#edit_session').val(data.student.session);
+                $('#edit_fees').val(data.student.fees);
+                $('#edit_qualification').val(data.student.qualification);
+                $('#edit_dob').val(data.student.dob);
+                $('#edit_mother_name').val(data.student.mother_name);
+                $('#edit_father_name').val(data.student.father_name);
+
+                $('#edit_address').val(data.student.address);
+
+                $('#editStudentModal').modal('show');
+
+            } else {
+
+                alert(data.message);
+
+            }
+
+        }
+
+    });
+
+});
+
 </script>
 <script>
     document.getElementById('departmentFilter').addEventListener('change', function() {

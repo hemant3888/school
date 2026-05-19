@@ -11,9 +11,9 @@ if(!isset($_GET['id'])){
 
 $center_id = intval($_GET['id']);
 
-#############################
-# FETCH CENTER
-#############################
+
+//  FETCH CENTER
+
 
 $sql = "SELECT * FROM center
 WHERE id='$center_id'";
@@ -27,18 +27,18 @@ if(!$center){
     die('Center Not Found');
 }
 
-#############################
-# STATUS CHECK
-#############################
+
+//  STATUS CHECK
+
 
 if($center['status'] != 'pending'){
 
     die('Already Processed');
 }
 
-#############################
-# GENERATE TOKEN
-#############################
+
+//  GENERATE TOKEN
+
 
 $token = bin2hex(random_bytes(32));
 
@@ -47,9 +47,9 @@ $token_expire = date(
     strtotime('+1 day')
 );
 
-#############################
-# INSERT USER
-#############################
+
+//  INSERT USER
+
 
 $user_sql = "INSERT INTO users(
 
@@ -82,9 +82,9 @@ if(!$user_query){
     die(mysqli_error($conn));
 }
 
-#############################
-# UPDATE CENTER STATUS
-#############################
+
+//  UPDATE CENTER STATUS
+
 
 $update_sql = "UPDATE center
 SET status='approved'
@@ -92,15 +92,15 @@ WHERE id='$center_id'";
 
 mysqli_query($conn,$update_sql);
 
-#############################
-# SET PASSWORD LINK
-#############################
+
+//  SET PASSWORD LINK
+
 
 $reset_link = "http://localhost/school/set-password.php?token=".$token;
 
-#############################
-# EMAIL TEMPLATE
-#############################
+
+//  EMAIL TEMPLATE
+
 
 $body = "
 
@@ -137,9 +137,8 @@ This link expires in 24 hours.
 
 ";
 
-#############################
-# SEND EMAIL
-#############################
+
+//  SEND EMAIL
 
 sendMail(
     $center['email'],
@@ -147,9 +146,7 @@ sendMail(
     $body
 );
 
-#############################
-# REDIRECT
-#############################
+//  REDIRECT
 
 header('Location:../all-center-request.php?approved=1');
 

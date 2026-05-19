@@ -203,6 +203,35 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     if($insert)
     {
 
+    $default_password = password_hash($dob, PASSWORD_DEFAULT);
+
+   
+    mysqli_query($conn, "
+        INSERT INTO users
+        (
+        center_id,
+            name,
+            email,
+            mobile,
+            image,
+            password,
+            role,
+            status,
+            created_at
+        )
+        VALUES
+        (
+        '$center_id',
+            '$student_name',
+            '$email',
+            '$mobile',
+            '$photo_name',
+            '$default_password',
+            'student',
+            'active',
+            NOW()
+        )
+    ");
         echo json_encode([
             'status'=>'success',
             'message'=>'Student Registered Successfully'

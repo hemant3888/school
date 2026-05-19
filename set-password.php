@@ -2,7 +2,7 @@
 
 include('includes/config.php');
 
-if(!isset($_GET['token'])){
+if (!isset($_GET['token'])) {
 
     die('Invalid Token');
 }
@@ -15,11 +15,11 @@ WHERE reset_token='$token'
 
 AND token_expire >= NOW()";
 
-$query = mysqli_query($conn,$sql);
+$query = mysqli_query($conn, $sql);
 
 $user = mysqli_fetch_assoc($query);
 
-if(!$user){
+if (!$user) {
 
     die('Token Expired');
 }
@@ -29,101 +29,97 @@ if(!$user){
 <?php include('header.php'); ?>
 
 
-    <style>
+<style>
+    .password-section {
 
-      
+        min-height: 100vh;
 
-        .password-section{
+        display: flex;
 
-            min-height: 100vh;
+        align-items: center;
 
-            display: flex;
+        justify-content: center;
 
-            align-items: center;
+        padding: 50px 15px;
+    }
 
-            justify-content: center;
+    .password-card {
 
-            padding: 50px 15px;
-        }
+        background: #fff;
 
-        .password-card{
+        border-radius: 15px;
 
-            background: #fff;
+        padding: 40px;
 
-            border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
-            padding: 40px;
+        width: 100%;
 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        max-width: 500px;
+    }
 
-            width: 100%;
+    .password-icon {
 
-            max-width: 500px;
-        }
+        width: 80px;
 
-        .password-icon{
+        height: 80px;
 
-            width: 80px;
+        background: #0d6efd;
 
-            height: 80px;
+        color: white;
 
-            background: #0d6efd;
+        border-radius: 50%;
 
-            color: white;
+        display: flex;
 
-            border-radius: 50%;
+        align-items: center;
 
-            display: flex;
+        justify-content: center;
 
-            align-items: center;
+        font-size: 35px;
 
-            justify-content: center;
+        margin: auto;
+    }
 
-            font-size: 35px;
+    .password-title {
 
-            margin: auto;
-        }
+        text-align: center;
 
-        .password-title{
+        font-weight: 700;
 
-            text-align: center;
+        margin-top: 20px;
 
-            font-weight: 700;
+        margin-bottom: 10px;
+    }
 
-            margin-top: 20px;
+    .password-subtitle {
 
-            margin-bottom: 10px;
-        }
+        text-align: center;
 
-        .password-subtitle{
+        color: #6c757d;
 
-            text-align: center;
+        margin-bottom: 30px;
+    }
 
-            color: #6c757d;
+    .form-control {
 
-            margin-bottom: 30px;
-        }
+        height: 50px;
 
-        .form-control{
+        border-radius: 10px;
+    }
 
-            height: 50px;
+    .btn-password {
 
-            border-radius: 10px;
-        }
+        height: 50px;
 
-        .btn-password{
+        border-radius: 10px;
 
-            height: 50px;
+        font-weight: 600;
 
-            border-radius: 10px;
-
-            font-weight: 600;
-
-            width: 100%;
-            margin-top: 10px;
-        }
-
-    </style>
+        width: 100%;
+        margin-top: 10px;
+    }
+</style>
 
 
 
@@ -149,13 +145,13 @@ if(!$user){
         </p>
 
         <form action="update-password.php"
-              method="POST">
+            method="POST">
 
             <input type="hidden"
-                   name="token"
-                   value="<?php 
-echo $token;
- ?>">
+                name="token"
+                value="<?php
+                        echo $token;
+                        ?>">
 
             <!-- Password -->
 
@@ -167,10 +163,10 @@ echo $token;
                 </label>
 
                 <input type="password"
-                       name="password"
-                       class="form-control"
-                       placeholder="Enter Password"
-                       required>
+                    name="password"
+                    class="form-control"
+                    placeholder="Enter Password"
+                    required>
 
             </div>
 
@@ -178,7 +174,7 @@ echo $token;
             <!-- Submit -->
 
             <button type="submit"
-                    class="btn btn-primary btn-password">
+                class="btn btn-primary btn-password">
 
                 <i class="bi bi-check-circle-fill"></i>
 
@@ -197,44 +193,33 @@ echo $token;
 <?php include('footer.php'); ?>
 
 
+ <?php
 
+//         include('includes/config.php');
 
+//         if (!isset($_GET['token'])) {
 
+//             die('Invalid Token');
+//         }
 
+//         $token = $_GET['token'];
 
+//         $sql = "SELECT * FROM users
 
+// WHERE reset_token='$token'
 
+// AND token_expire >= NOW()";
 
+//         $query = mysqli_query($conn, $sql);
 
+//         $user = mysqli_fetch_assoc($query);
 
+//         if (!$user) {
 
-<!-- <?php
+//             die('Token Expired');
+//         }
 
-include('includes/config.php');
-
-if(!isset($_GET['token'])){
-
-    die('Invalid Token');
-}
-
-$token = $_GET['token'];
-
-$sql = "SELECT * FROM users
-
-WHERE reset_token='$token'
-
-AND token_expire >= NOW()";
-
-$query = mysqli_query($conn,$sql);
-
-$user = mysqli_fetch_assoc($query);
-
-if(!$user){
-
-    die('Token Expired');
-}
-
-?> -->
+        ?> 
 
 <!-- <form action="update-password.php"
       method="POST">
