@@ -12,9 +12,22 @@ if(isset($_POST['student_id']))
 
     $query = mysqli_query($conn, "
 
-    SELECT * FROM students
+        SELECT 
+            students.*,
 
-    WHERE id='$student_id'
+            department.depart_name,
+
+            course.course_name
+
+        FROM students
+
+        LEFT JOIN department
+        ON students.depart_id = department.id
+
+        LEFT JOIN course
+        ON students.course_id = course.id
+
+        WHERE students.id='$student_id'
 
     ");
 

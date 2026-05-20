@@ -175,6 +175,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
               <i class="bi bi-circle"></i><span>All Students</span>
             </a>
           </li>
+          <li>
+            <a href="all-id-cards.php">
+              <i class="bi bi-circle"></i><span>ID Cards</span>
+            </a>
+          </li>
 
         </ul>
       </li>

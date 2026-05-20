@@ -263,7 +263,7 @@
                                 </button>
                                 <button class="btn btn-info btn-sm editstudent" data-id="<?php echo $row['id']; ?>">
 
-                                     
+
                                     <i class="bi bi-pencil"></i>
                                 </button>
 
@@ -503,7 +503,7 @@
 
             <div class="modal-body">
 
-                <form id="editStudentForm">
+                <form id="editStudentForm" enctype="multipart/form-data">
 
                     <input type="hidden"
                         name="student_id"
@@ -519,7 +519,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Student Name
                                 </label>
 
@@ -529,12 +529,33 @@
                                     class="form-control">
 
                             </div>
+                            <!-- STUDENT PHOTO -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+
+                                    Student Photo
+
+                                </label>
+
+                                <input type="file"
+                                    name="image"
+                                    class="form-control">
+
+                                <small class="text-danger">
+
+                                    Max Size: 2MB | JPG, PNG, JPEG
+
+                                </small>
+
+                            </div>
 
                             <!-- FATHER NAME -->
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Father Name
                                 </label>
 
@@ -549,7 +570,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Mother Name
                                 </label>
 
@@ -559,12 +580,52 @@
                                     class="form-control">
 
                             </div>
+                            <!-- Department -->
 
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Department
+                                </label>
+
+                                <select
+                                    name="department_id"
+                                    id="edit_depart"
+                                    class="form-control">
+
+                                    <option value="">
+                                        Select Department
+                                    </option>
+
+                                    <?php
+
+                                    $department_query = mysqli_query($conn, "
+    
+        SELECT * FROM department
+    
+    ");
+
+                                    while ($department = mysqli_fetch_assoc($department_query)) {
+                                    ?>
+
+                                        <option value="<?php echo $department['id']; ?>">
+
+                                            <?php echo $department['depart_name']; ?>
+
+                                        </option>
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                </select>
+
+                            </div>
                             <!-- MOBILE -->
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Mobile
                                 </label>
 
@@ -579,7 +640,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Email
                                 </label>
 
@@ -594,7 +655,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     DOB
                                 </label>
 
@@ -609,7 +670,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Gender
                                 </label>
 
@@ -637,7 +698,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Qualification
                                 </label>
 
@@ -652,7 +713,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Fees
                                 </label>
 
@@ -667,7 +728,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Session
                                 </label>
 
@@ -678,11 +739,34 @@
 
                             </div>
 
+                            <!-- course -->
+
+                            <div class="mb-3">
+
+                                <label class="form-label fw-semibold">
+                                    Course
+                                </label>
+
+                                <select
+                                    name="course_id"
+                                    id="edit_course"
+                                    class="form-control">
+
+                                    <option value="">
+                                        Select Course
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
                             <!-- STATE -->
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     State
                                 </label>
 
@@ -697,7 +781,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     City
                                 </label>
 
@@ -712,7 +796,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Pincode
                                 </label>
 
@@ -727,7 +811,7 @@
 
                             <div class="mb-3">
 
-                                <label class="form-label">
+                                <label class="form-label fw-semibold">
                                     Address
                                 </label>
 
@@ -806,60 +890,87 @@
     });
 </script>
 <script>
+    $('#edit_depart').change(function() {
 
-$(document).on('click', '.editstudent', function () {
+        let department_id = $(this).val();
 
-    let student_id = $(this).data('id');
+        $.ajax({
 
-    $.ajax({
+            url: 'db/fetch-course.php',
 
-        url: 'db/get-student.php',
+            type: 'POST',
 
-        type: 'POST',
+            data: {
+                department_id: department_id
+            },
 
-        data: {
-            student_id: student_id
-        },
+            success: function(data) {
 
-        success: function (response) {
-
-            let data = JSON.parse(response);
-
-            if (data.status == 'success') {
-
-                $('#edit_student_id').val(data.student.id);
-
-                $('#edit_stu_name').val(data.student.stu_name);
-
-                $('#edit_mobile').val(data.student.mobile);
-
-                $('#edit_email').val(data.student.email);
-                $('#edit_state').val(data.student.state);
-                $('#edit_city').val(data.student.city);
-                $('#edit_pincode').val(data.student.pincode);
-                $('#edit_session').val(data.student.session);
-                $('#edit_fees').val(data.student.fees);
-                $('#edit_qualification').val(data.student.qualification);
-                $('#edit_dob').val(data.student.dob);
-                $('#edit_mother_name').val(data.student.mother_name);
-                $('#edit_father_name').val(data.student.father_name);
-
-                $('#edit_address').val(data.student.address);
-
-                $('#editStudentModal').modal('show');
-
-            } else {
-
-                alert(data.message);
+                $('#edit_course').html(data);
 
             }
 
-        }
+        });
 
     });
+</script>
 
-});
 
+<script>
+    $(document).on('click', '.editstudent', function() {
+
+        let student_id = $(this).data('id');
+
+        $.ajax({
+
+            url: 'db/get-student.php',
+
+            type: 'POST',
+
+            data: {
+                student_id: student_id
+            },
+
+            success: function(response) {
+
+                let data = JSON.parse(response);
+
+                if (data.status == 'success') {
+
+                    $('#edit_student_id').val(data.student.id);
+
+                    $('#edit_stu_name').val(data.student.stu_name);
+
+                    $('#edit_mobile').val(data.student.mobile);
+                    $('#edit_depart').val(data.student.depart_id);
+                    $('#edit_course').val(data.student.course_id);
+
+                    $('#edit_email').val(data.student.email);
+                    $('#edit_state').val(data.student.state);
+                    $('#edit_city').val(data.student.city);
+                    $('#edit_pincode').val(data.student.pincode);
+                    $('#edit_session').val(data.student.session);
+                    $('#edit_fees').val(data.student.fees);
+                    $('#edit_qualification').val(data.student.qualification);
+                    $('#edit_dob').val(data.student.dob);
+                    $('#edit_mother_name').val(data.student.mother_name);
+                    $('#edit_father_name').val(data.student.father_name);
+
+                    $('#edit_address').val(data.student.address);
+
+                    $('#editStudentModal').modal('show');
+
+                } else {
+
+                    alert(data.message);
+
+                }
+
+            }
+
+        });
+
+    });
 </script>
 <script>
     document.getElementById('departmentFilter').addEventListener('change', function() {
@@ -873,6 +984,51 @@ $(document).on('click', '.editstudent', function () {
         }
 
     });
+</script>
+<script>
+    $('#editStudentForm').submit(function(e){
+
+    e.preventDefault();
+       let formData = new FormData(this);
+
+    $.ajax({
+
+        url:'db/update-student.php',
+
+        type:'POST',
+
+         data:formData,
+           processData:false,
+
+        contentType:false,
+
+        success:function(response)
+        {
+
+            let res = JSON.parse(response);
+
+            if(res.status == 'success')
+            {
+
+                toastr.success(res.message);
+
+                $('#editStudentModal').modal('hide');
+
+                location.reload();
+
+            }
+            else
+            {
+
+                toastr.error(res.message);
+
+            }
+
+        }
+
+    });
+
+});
 </script>
 <script>
     $(document).ready(function() {
