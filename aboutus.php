@@ -79,7 +79,7 @@
     .about-img-wrap img {
       width: 100%;
       border-radius: 24px 24px 0 0;
-      object-fit: cover;
+      object-fit: fill;
       height: 420px;
       box-shadow: 0 20px 60px rgba(249,115,22,.18);
     }
@@ -91,7 +91,7 @@
       padding: .65rem 1.2rem;
       border-radius: 12px;
       font-weight: 800;
-      font-size: 1.85rem;
+      font-size: 1.5rem;
       box-shadow: 0 6px 20px rgba(249,115,22,.4);
     }
     .about-img-badge span { font-size: 1.5rem; display: block; font-weight: 900; }
@@ -132,7 +132,7 @@
 
     .mission-img {
       width: 100%;
-      height: 380px;
+      height: 430px;
       object-fit: cover;
       border-radius: 20px;
       box-shadow: 0 16px 48px rgba(249,115,22,.14);
@@ -412,7 +412,7 @@
         <div class="col-lg-6">
           <div class="about-img-wrap">
             <img
-              src="assets/images/abt1.jpeg"
+              src="assets/images/about.jpeg"
               alt="Education at TGIIT"
             />
             <div class="about-img-badge">
@@ -437,7 +437,7 @@
         <!-- Image -->
         <div class="col-lg-5">
           <img
-            src="assets/images/abt2.jpeg"
+            src="assets/images/our-vision.jpg"
             alt="Mission – TGIIT"
             class="mission-img"
           />

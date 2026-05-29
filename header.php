@@ -328,7 +328,7 @@
 								<button class="btn btn-link dropdown-toggle" data-toggle="dropdown"><span class="text"><i class="icofont icofont-user"></i>Student Zone</span> <i class="icofont icofont-caret-down"></i></button>
 								<ul class="dropdown-menu dropdown-menu-right">
 									<li>
-									    	<a href="idcard.php"><img src="assets/images/flag4.jpg">ID Card</a>
+									    	<a href="id-card.php"><img src="assets/images/flag4.jpg">ID Card</a>
 										<a href="download-slip.php"><img src="assets/images/flag4.jpg">Registration Slip</a>
 										<a href="admitcard.php"><img src="assets/images/flag5.jpg">Admit Card</a>
 										<a href="student-result.php"><img src="assets/images/flag1.jpg">Student Result</a>
@@ -444,11 +444,11 @@
 												<!-- <li><a href="admissionprocedure.php">Admission Procedure</a></li>
 												<li><a href="studentdownloads.php">Downloads</a></li> -->
 												<li><a href="download-slip.php">Registration Slip</a></li>
-												<li><a href="idcard.php">ID Card</a></li>
+												<li><a href="id-card.php">ID Card</a></li>
 												<li><a href="student-verification.php">Student Verification</a></li>
 												<li><a href="admitcard.php">Admit Card</a></li>
 												<!-- <li><a href="feedbackstudent.php">Feedback for Students</a></li> -->
-												<li><a href="studentfaqs.php">FAQ's</a></li>
+												<!-- <li><a href="studentfaqs.php">FAQ's</a></li> -->
 											</ul>
 										</div>
 									</div>

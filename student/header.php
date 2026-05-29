@@ -9,258 +9,190 @@ if($_SESSION['role'] != 'student')
     header("Location: http://localhost/school/login.php");
     exit;
 }
-
 $user_id = $_SESSION['user_id'];
 
 $sql = "
+
 SELECT 
+
     users.*,
-    students.stu_name,
-    students.father_name,
-    students.photo AS student_photo,
+
     students.registration_no,
+   
+   
+  
+   
+    students.session,
+    students.enroll_no,
+
+    students.fees,
 
     center.center_name,
-    center.owner_name
+
+    department.depart_name,
+
+    course.course_name
 
 FROM users
 
-LEFT JOIN students 
-ON students.email = users.email
+LEFT JOIN students
+ON students.id = users.student_id
 
-LEFT JOIN center 
+LEFT JOIN center
 ON center.id = users.center_id
 
+LEFT JOIN department
+ON department.id = students.depart_id
+
+LEFT JOIN course
+ON course.id = students.course_id
+
 WHERE users.id = '$user_id'
+
 ";
-$query = mysqli_query($conn, $sql);
-$user = mysqli_fetch_assoc($query);
+
+$result = mysqli_query($conn, $sql);
+
+$user = mysqli_fetch_assoc($result);
+$name = $user['name'];
+$email = $user['email'];
+$enrollment = $user['enroll_no'];
+$mobile = $user['mobile'];
+$center = $user['center_name'] ?? '';
+$department = $user['depart_name'] ?? '';
+$course = $user['course_name'] ?? '';
+$photo = $user['image'] ?? '';
+// print_r($user);
+// exit;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Student - TGIIT</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-  
-  <!-- Favicons -->
-  <link rel="icon" type="image/png" href="assets/logo/logo1.jpeg">
-  <!-- <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/favicon.png"> -->
-  <link rel="icon" href="assets/logo/logo1.jpeg">
-  <!-- <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/favicon.png"> -->
-  <!-- <link rel="manifest" href="/site.webmanifest"> -->
-  <!-- Google Fonts -->
-  <link href="" rel="preconnect">
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
-<link rel="stylesheet"
-href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-
-<link rel="stylesheet"
-href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
-  <!-- Bootstrap Icons CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Student Portal</title>
+  <link rel="icon" href="assets/images/logo1.png" type="image">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center" style="background-color: #FC9928;">
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
 
-    <div class="d-flex align-items-center justify-content-between">
-      <center> <a href="dashboard.php" class="logo d-flex align-items-center text-light">
-          <!-- <img src="assets/logo/logo1.jpeg" alt="LOGO"
-            style="max-width:70px;"> -->
-          TGIIT 
-        </a></center>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
-
-    <!-- <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div> -->
-    <!-- End Search Bar -->
-
-   <div class="d-flex justify-content-between align-items-center w-100 flex-wrap">
-
-  <!-- LEFT SIDE -->
-  <div class="institute-heading">
-
-    <!-- <h4 class="mb-0 fw-bold text-white ps-3">
-      <?php echo $center_name; ?>
-    </h4> -->
-
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <i class="bi bi-check-circle-fill" id="toast-icon"></i>
+    <span id="toast-msg">Check-in recorded</span>
   </div>
 
-  <!-- RIGHT SIDE -->
-  <nav class="header-nav">
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-gem"><i class="bi bi-mortarboard-fill"></i></div>
+      <div class="logo-text">
+        <h3><?php echo $name; ?></h3>
+        <span>Student Portal</span>
+      </div>
+    </div>
 
-    <ul class="d-flex align-items-center mb-0">
+    <div class="profile-card">
+      <div class="av-ring"><img src="../center/uploads/students/<?php echo $photo; ?>" alt="profile"></div>
+      <h5><?php echo $name; ?></h5>
+      <p><?php echo $course; ?></p>
+      <div class="pbadge"><?php echo $enrollment; ?></div>
+    </div>
 
-      <li class="nav-item dropdown pe-3">
+    <div class="menu-label">Navigation</div>
+    <?php
+    $current_page = basename($_SERVER['PHP_SELF']);
+    ?>
 
-        <a class="nav-link nav-profile d-flex align-items-center pe-0"
-          href="#"
-          data-bs-toggle="dropdown">
+    <ul class="sidebar-nav">
 
-          <img src="../center/uploads/students/<?php echo (!empty($image) && file_exists('../center/uploads/students/' . $image))
-                                      ? $image
-                                      : 'user.png'; ?>"
-                                      
-            alt="Profile"
-            class="rounded-circle">
-
-          <span class="d-none d-md-block dropdown-toggle ps-2 text-light">
-            <?php echo $user['stu_name']; ?>
-          </span>
-
+      <li>
+        <a href="dashboard.php"
+          class="nav-link <?= ($current_page == 'dashboard.php') ? 'active' : '' ?>">
+          <i class="bi bi-grid-1x2"></i>Dashboard
         </a>
+      </li>
 
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+      <li>
+        <a href="attendence-history.php"
+          class="nav-link <?= ($current_page == 'attendence-history.php') ? 'active' : '' ?>">
+          <i class="bi bi-calendar3"></i>Attendance History
+        </a>
+      </li>
 
-          <li class="dropdown-header">
-            <h6><?php echo $user['stu_name']; ?></h6>
-            <span><?php echo $user['email']; ?></span>
-          </li>
+      <li>
+        <a href="profile.php"
+          class="nav-link <?= ($current_page == 'profile.php') ? 'active' : '' ?>">
+          <i class="bi bi-person-badge"></i>My Profile
+        </a>
+      </li>
 
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li>
-            <a class="dropdown-item d-flex align-items-center"
-              href="user-profile.php">
-
-              <i class="bi bi-person"></i>
-              <span>My Profile</span>
-
-            </a>
-          </li>
-
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li>
-            <a class="dropdown-item d-flex align-items-center"
-              href="../db/logout.php">
-
-              <i class="bi bi-box-arrow-right"></i>
-              <span>Sign Out</span>
-
-            </a>
-          </li>
-
-        </ul>
-
+      <li>
+        <a href="settings.php"
+          class="nav-link <?= ($current_page == 'settings.php') ? 'active' : '' ?>">
+          <i class="bi bi-shield-lock"></i>Settings
+        </a>
       </li>
 
     </ul>
 
-  </nav>
+    <div class="sdiv"></div>
+   <button class="logout-btn" onclick="window.location.href='../db/logout.php'">
+    <i class="bi bi-box-arrow-left"></i>Logout
+</button>
+  </aside>
+  <!-- ═══ MAIN ═══ -->
+  <main class="main" id="main">
 
-</div>
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="tbar-left">
+        <button class="toggle-btn" id="toggleBtn" aria-label="Toggle sidebar">
+          <i class="bi bi-list"></i>
+        </button>
+        <div>
+          <div class="tbar-title">Dashboard</div>
+          <div class="tbar-sub">Welcome back, <?php echo $name; ?> 👋</div>
+        </div>
+      </div>
+      <div class="tbar-right">
+        <div class="date-chip">
+          <i class="bi bi-calendar3" style="color:var(--accent)"></i>
+          <span id="live-date"><?php echo date("D, d M Y"); ?></span>
+        </div>
 
-  </header><!-- End Header -->
+        <div class="top-av"><img src="../center/uploads/students/<?php echo $photo; ?>" alt="Profile"></div>
+      </div>
+    </div>
+    <script>
+      /* ── SIDEBAR TOGGLE ── */
+      const sidebar = document.getElementById('sidebar');
+      const mainEl = document.getElementById('main');
+      const overlay = document.getElementById('overlay');
+      const toggleBtn = document.getElementById('toggleBtn');
+      let desktopOpen = true;
+      const isMob = () => window.innerWidth <= 991;
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link " href="dashboard.php">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-person-circle"></i><span>Attendence</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="attendence-report.php">
-              <i class="bi bi-circle"></i><span>Attendence Report</span>
-            </a>
-          </li>
-
-        </ul>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#gallery" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-mortarboard-fill"></i></i><span>Student Detail</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="gallery" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="student-details.php">
-              <i class="bi bi-circle"></i><span>Show Details</span>
-            </a>
-          </li>
-
-        </ul>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#banner" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-bookmark"></i></i><span>Certificate</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="banner" class="nav-content collapse " data-bs-parent="#banner">
-          <li>
-            <a href="all-certificates.php">
-              <i class="bi bi-circle"></i><span>All Certificates</span>
-            </a>
-          </li>
-
-        </ul>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#center-request" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-person-circle"></i><span>Center Request</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="center-request" class="nav-content collapse " data-bs-parent="#center-request">
-          <li>
-            <a href="all-center-request.php">
-              <i class="bi bi-circle"></i><span>All Center Requests</span>
-            </a>
-          </li>
-
-        </ul>
-      </li> -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="../db/logout.php">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Logout</span>
-        </a>
-      </li><!-- End Login Page Nav -->
-    </ul>
-
-  </aside><!-- End Sidebar-->
-
-  <main id="main" class="main">
+      toggleBtn.addEventListener('click', () => {
+        if (isMob()) {
+          sidebar.classList.toggle('mob-open');
+          overlay.classList.toggle('show');
+        } else {
+          desktopOpen = !desktopOpen;
+          sidebar.classList.toggle('collapsed');
+          mainEl.classList.toggle('expanded');
+        }
+      });
+      overlay.addEventListener('click', () => {
+        sidebar.classList.remove('mob-open');
+        overlay.classList.remove('show');
+      });
+    </script>

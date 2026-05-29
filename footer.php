@@ -76,6 +76,89 @@
 		</div>
 	</div>
 	</form>
+	<style>
+.seminar-popup{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 99999;
+    overflow-y: auto;
+}
+
+.popup-box{
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    max-height: 95vh;
+    overflow-y: auto;
+    border-radius: 14px;
+    animation: popupShow .3s ease;
+}
+
+.popup-box img{
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 14px;
+}
+
+.close-popup{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 100000;
+}
+
+@keyframes popupShow{
+    from{
+        transform: scale(.8);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+	</style>
+	<div id="seminarPopup" class="seminar-popup">
+
+    <div class="popup-box">
+
+        <button class="close-popup " id="closePopup">
+            &times;
+        </button>
+
+        <img src="assets/images/semi.jpeg" alt="Seminar">
+
+    </div>
+
+</div>
+<script>
+
+window.addEventListener("load", function(){
+
+    document.getElementById("seminarPopup").style.display = "flex";
+
+});
+
+document.getElementById("closePopup").addEventListener("click", function(){
+
+    document.getElementById("seminarPopup").style.display = "none";
+
+});
+
+</script>
 	<footer>
 		<div class="container">
 			<div class="row inner">
@@ -183,6 +266,7 @@
 			</div>
 		</div>
 	</footer>
+
 	<script src="assets/js/jquery.2.1.1.min.js" type="text/javascript"></script>
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 	<script>

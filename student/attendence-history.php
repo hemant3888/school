@@ -1,51 +1,9 @@
+ <?php include 'header.php'; ?>
 
-<?php include 'header.php'; ?>
+<div id="page-dashboard">
 
 
-    <!-- ── DASHBOARD ── -->
-    <div id="page-dashboard">
-
-      <!-- STAT CARDS -->
-      <div class="stats-grid">
-        <div class="stat-card gold">
-          <div class="stat-icon"><i class="bi bi-calendar-check"></i></div>
-          <div class="stat-label">Total Days</div>
-          <div class="stat-value">42</div>
-         
-        </div>
-        <div class="stat-card green">
-          <div class="stat-icon"><i class="bi bi-person-check"></i></div>
-          <div class="stat-label">Days Present</div>
-          <div class="stat-value">36</div>
-         
-        </div>
-        <div class="stat-card red">
-          <div class="stat-icon"><i class="bi bi-person-x"></i></div>
-          <div class="stat-label">Days Absent</div>
-          <div class="stat-value">6</div>
-         
-        </div>
-        <div class="stat-card blue">
-          <div class="stat-icon"><i class="bi bi-graph-up"></i></div>
-          <div class="stat-label">Attendance %</div>
-          <div class="stat-value">85%</div>
-          
-        </div>
-      </div>
-
-      <!-- ACTION ROW -->
-      <div class="action-row d-flex">
-        <button class="action-btn btn-ci" onclick="markAtt('checkin')">
-          <i class="bi bi-box-arrow-in-right"></i>Check In
-        </button>
-        <button class="action-btn btn-co" onclick="markAtt('checkout')">
-          <i class="bi bi-box-arrow-left"></i>Check Out
-        </button>
-
-       
-      </div>
-
-      <!-- TABLE -->
+ <!-- TABLE -->
       <div class="sec-header">
         <div class="sec-title">Recent Attendance</div>
         <a href="#" class="view-all">View All →</a>
@@ -108,11 +66,7 @@
           </table>
         </div>
       </div>
+</div>
 
-     
 
-    </div><!-- /dashboard -->
-
-   
-
-<?php include 'footer.php'; ?>
+  <?php include 'footer.php'; ?>

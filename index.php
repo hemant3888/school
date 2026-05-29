@@ -11,7 +11,7 @@
 
 .about .feature-img img {
     width: 100%;
-    height: 450px;
+    height: 380px;
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -99,28 +99,28 @@ $query = mysqli_query($conn, "SELECT * FROM slider ORDER BY id DESC");
 				<div class="icons">
 					<div class="icon"><img src="assets/images/icon_01.png" class="img-responsive" alt="icon" title="icon"></div>
 				</div>
-				<h4><a href="ViewDepartments.php">Courses Offered</a></h4>
+				<h4><a href="">Courses Offered</a></h4>
 				<p>TGIIT provides various types of courses in various fields of education..</p>
 			</div>
 			<div class="col-sm-3 col-xs-12 box text-center">
 				<div class="icons">
 					<div class="icon"><img src="assets/images/icon_02.png" class="img-responsive" alt="icon" title="icon"></div>
 				</div>
-				<h4><a href="student-verification.php">Online Verification</a></h4>
+				<h4><a href="">Online Verification</a></h4>
 				<p>Students can verify their results online at any time and at any place.</p>
 			</div>
 			<div class="col-sm-3 col-xs-12 box text-center">
 				<div class="icons">
 					<div class="icon"><img src="assets/images/icon_03.png" class="img-responsive" alt="icon" title="icon"></div>
 				</div>
-				<h4><a href="franchiseregistration.php">Become Our Partner</a></h4>
+				<h4><a href="">Become Our Partner</a></h4>
 				<p>You can open your training centre with our affiliation.</p>
 			</div>
 			<div class="col-sm-3 col-xs-12 box text-center">
 				<div class="icons">
 					<div class="icon"><img src="assets/images/icon_04.png" class="img-responsive" alt="icon" title="icon"></div>
 				</div>
-				<h4><a href="certificates.php">Approvals and Memerships</a></h4>
+				<h4><a href="">Approvals and Memerships</a></h4>
 				<p>TGIIT INDIA has more than 40+ Approvals from India, USA and Canada.</p>
 			</div>
 		</div>
@@ -162,7 +162,7 @@ $query = mysqli_query($conn, "SELECT * FROM slider ORDER BY id DESC");
 					<hr>
 				</div> -->
 				<div>
-					<img src="assets/images/6.jpeg" alt="About Image" class="img-fluid">
+					<img src="assets/images/about2.jpg" alt="About Image" class="img-fluid">
 				</div>
 			</div>
 		</div>

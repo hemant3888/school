@@ -4,8 +4,7 @@ include '../../includes/config.php';
 
 header('Content-Type: application/json');
 
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-{
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $center_id      = trim($_POST['center_id']);
     $student_name    = trim($_POST['student_name']);
@@ -30,105 +29,95 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
     // VALIDATION
 
-    if(empty($student_name))
-    {
+    if (empty($student_name)) {
         echo json_encode([
-            'status'=>'error',
-            'message'=>'Student Name Required'
+            'status' => 'error',
+            'message' => 'Student Name Required'
         ]);
         exit;
     }
 
-    if($fees < 1000)
-    {
+    if ($fees < 1000) {
         echo json_encode([
-            'status'=>'error',
-            'message'=>'Minimum Fees ₹1000 Required'
+            'status' => 'error',
+            'message' => 'Minimum Fees ₹1000 Required'
         ]);
         exit;
     }
 
     // PHOTO VALIDATION
 
-    if($_FILES['photo']['name'] != '')
-    {
+    if ($_FILES['photo']['name'] != '') {
 
         $photo = $_FILES['photo'];
 
         $photo_size = $photo['size'];
 
-        $photo_ext = strtolower(pathinfo($photo['name'],PATHINFO_EXTENSION));
+        $photo_ext = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
 
-        $allowed_photo = ['jpg','jpeg','png'];
+        $allowed_photo = ['jpg', 'jpeg', 'png'];
 
-        if(!in_array($photo_ext,$allowed_photo))
-        {
+        if (!in_array($photo_ext, $allowed_photo)) {
             echo json_encode([
-                'status'=>'error',
-                'message'=>'Invalid Photo Format'
+                'status' => 'error',
+                'message' => 'Invalid Photo Format'
             ]);
             exit;
         }
 
-        if($photo_size > 2097152)
-        {
+        if ($photo_size > 2097152) {
             echo json_encode([
-                'status'=>'error',
-                'message'=>'Photo Max 2MB Allowed'
+                'status' => 'error',
+                'message' => 'Photo Max 2MB Allowed'
             ]);
             exit;
         }
 
-        $photo_name = time().'_photo.'.$photo_ext;
+        $photo_name = time() . '_photo.' . $photo_ext;
 
-        move_uploaded_file($photo['tmp_name'],'../uploads/students/'.$photo_name);
-
+        move_uploaded_file($photo['tmp_name'], '../uploads/students/' . $photo_name);
     }
 
     // PAYMENT FILE VALIDATION
 
-    if($_FILES['payment_screenshot']['name'] != '')
-    {
+    if ($_FILES['payment_screenshot']['name'] != '') {
 
         $payment = $_FILES['payment_screenshot'];
 
         $payment_size = $payment['size'];
 
-        $payment_ext = strtolower(pathinfo($payment['name'],PATHINFO_EXTENSION));
+        $payment_ext = strtolower(pathinfo($payment['name'], PATHINFO_EXTENSION));
 
-        $allowed_payment = ['jpg','jpeg','png','pdf'];
+        $allowed_payment = ['jpg', 'jpeg', 'png', 'pdf'];
 
-        if(!in_array($payment_ext,$allowed_payment))
-        {
+        if (!in_array($payment_ext, $allowed_payment)) {
             echo json_encode([
-                'status'=>'error',
-                'message'=>'Invalid Payment File'
+                'status' => 'error',
+                'message' => 'Invalid Payment File'
             ]);
             exit;
         }
 
-        if($payment_size > 1048576)
-        {
+        if ($payment_size > 1048576) {
             echo json_encode([
-                'status'=>'error',
-                'message'=>'Payment File Max 1MB Allowed'
+                'status' => 'error',
+                'message' => 'Payment File Max 1MB Allowed'
             ]);
             exit;
         }
 
-        $payment_name = time().'_payment.'.$payment_ext;
+        $payment_name = time() . '_payment.' . $payment_ext;
 
-        move_uploaded_file($payment['tmp_name'],'../uploads/payments/'.$payment_name);
-
+        move_uploaded_file($payment['tmp_name'], '../uploads/payments/' . $payment_name);
     }
 
     // REGISTRATION NUMBER
 
-    $registration_no = 'TGIIT'.date('Y').date('m').rand(1000,9999);
+    $registration_no = 'TGIIT' . date('Y') . date('m') . rand(1000, 9999);
 
     // INSERT QUERY
 
-    $insert = mysqli_query($conn,"
+    $insert = mysqli_query($conn, "
 
     INSERT INTO students
 
@@ -200,15 +189,18 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
     ");
 
-    if($insert)
-    {
+    if ($insert) {
+           // Last inserted student ID
+    $student_id = mysqli_insert_id($conn);
 
-    $default_password = password_hash($dob, PASSWORD_DEFAULT);
+        $pass = 123456;
+        $default_password = password_hash($pass, PASSWORD_DEFAULT);
 
-   
-    mysqli_query($conn, "
+
+        mysqli_query($conn, "
         INSERT INTO users
         (
+        student_id,
         center_id,
             name,
             email,
@@ -221,6 +213,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         )
         VALUES
         (
+           '$student_id',
         '$center_id',
             '$student_name',
             '$email',
@@ -233,20 +226,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
         )
     ");
         echo json_encode([
-            'status'=>'success',
-            'message'=>'Student Registered Successfully'
+            'status' => 'success',
+            'message' => 'Student Registered Successfully'
         ]);
-
-    }
-    else
-    {
+    } else {
 
         echo json_encode([
-            'status'=>'error',
-            'message'=>'Database Error'
+            'status' => 'error',
+            'message' => 'Database Error'
         ]);
-
     }
-
 }
-?>

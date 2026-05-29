@@ -1,16 +1,39 @@
 <?php
 
-include '../includes/config.php';
+include 'includes/config.php';
 
-if(!isset($_GET['id']))
-{
-    die("Student ID Missing");
+if(!isset($_GET['enrollment_no'])){
+    die("Invalid Request");
 }
 
-$id = mysqli_real_escape_string(
-    $conn,
-    $_GET['id']
-);
+$enrollment_no = mysqli_real_escape_string($conn, $_GET['enrollment_no']);
+
+$query = mysqli_query($conn,"
+    SELECT * FROM students 
+    WHERE enroll_no='$enrollment_no'
+");
+
+$student = mysqli_fetch_assoc($query);
+
+if(!$student){
+    die("Student Not Found");
+}
+
+// yaha se aapka existing ID card PDF/code chalega
+
+
+
+// include '../includes/config.php';
+
+// if(!isset($_GET['id']))
+// {
+//     die("Student ID Missing");
+// }
+
+// $id = mysqli_real_escape_string(
+//     $conn,
+//     $_GET['id']
+// );
 
 $query = mysqli_query($conn, "
 
@@ -30,7 +53,7 @@ ON students.course_id = course.id
 LEFT JOIN center
 ON students.center_id = center.id
 
-WHERE students.id='$id'
+WHERE students.enroll_no='$enrollment_no'
 
 ");
 
@@ -337,7 +360,7 @@ $row = mysqli_fetch_assoc($query);
 
         <div class="logo">
 
-            <img src="assets/logo/logo1.jpeg">
+            <img src="assets/images/logo1.jpeg">
 
         </div>
 
@@ -364,7 +387,7 @@ $row = mysqli_fetch_assoc($query);
         <div class="photo">
 
             <img
-                src="../center/uploads/students/<?php echo $row['photo']; ?>">
+                src="center/uploads/students/<?php echo $row['photo']; ?>">
 
         </div>
 
@@ -489,8 +512,8 @@ $row = mysqli_fetch_assoc($query);
     <!-- FOOTER -->
 
     <div class="footer11">
-
-        <h5>Center - <?php echo $row['center_name']; ?></h5>
+<h5>Center - <?php echo $row['center_name']; ?></h5>
+       
 
     </div>
 
