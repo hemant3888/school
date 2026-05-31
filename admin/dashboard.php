@@ -70,7 +70,7 @@ include('header.php');
           </div>
         </div><!-- End Revenue Card -->
         <!-- Revenue Card -->
-        <div class="col-lg-4 col-md-6">
+        <!-- <div class="col-lg-4 col-md-6">
           <div class="card info-card revenue-card">
 
           
@@ -91,7 +91,8 @@ include('header.php');
             </div>
 
           </div>
-        </div><!-- End Revenue Card -->
+        </div> -->
+        <!-- End Revenue Card -->
 
         <!-- Customers Card -->
         <div class="col-lg-4 col-md-6">
