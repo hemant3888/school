@@ -231,6 +231,11 @@ href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.
               <i class="bi bi-circle"></i><span>All Students</span>
             </a>
           </li>
+          <li>
+            <a href="attendance.php">
+              <i class="bi bi-circle"></i><span>Attendance</span>
+            </a>
+          </li>
 
         </ul>
       </li>

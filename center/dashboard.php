@@ -26,19 +26,19 @@ include('header.php');
 
               // SQL Queries
               $sql = "SELECT COUNT(*) AS total FROM students where center_id='$center'";
-              // $sql1 = "SELECT COUNT(*) AS total1 FROM comment";
+              $sql1 = "SELECT COUNT(*) AS total1 FROM course";
               // $sql2 = "SELECT COUNT(*) AS total2 FROM enquiry";
               // $sql3 = "SELECT COUNT(*) AS total3 FROM job_application";
 
               // Execute queries
               $res = mysqli_query($conn, $sql);
-              // $res1 = mysqli_query($conn, $sql1);
+              $res1 = mysqli_query($conn, $sql1);
               // $res2 = mysqli_query($conn, $sql2);
               // $res3 = mysqli_query($conn, $sql3);
 
               // Fetch results separately
               $row = mysqli_fetch_assoc($res);
-              // $row1 = mysqli_fetch_assoc($res1);
+              $row1 = mysqli_fetch_assoc($res1);
               // $row2 = mysqli_fetch_assoc($res2);
               // $row3 = mysqli_fetch_assoc($res3);
 
@@ -77,14 +77,14 @@ include('header.php');
           
 
             <div class="card-body">
-              <h5 class="card-title">Total Teacher</h5>
+              <h5 class="card-title">Total Cources</h5>
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                  <i class="bi bi-person-badge-fill"></i>
                 </div>
                 <div class="ps-3">
-                  <h6>2</h6>
+                  <h6><?php echo $row1['total1']; ?></h6>
                  
 
                 </div>

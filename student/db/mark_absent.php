@@ -4,15 +4,14 @@ date_default_timezone_set('Asia/Kolkata');
 
 require_once '../../includes/config.php';
 
-$yesterday = date('Y-m-d',strtotime('-1 day'));
+$yesterday = date('Y-m-d', strtotime('-1 day'));
 
 $students = mysqli_query(
     $conn,
-    "SELECT id FROM users WHERE status=1"
+    "SELECT id FROM users WHERE status='active' AND role='student'"
 );
 
-while($student = mysqli_fetch_assoc($students))
-{
+while ($student = mysqli_fetch_assoc($students)) {
     $userId = $student['id'];
 
     $check = mysqli_query(
@@ -23,8 +22,7 @@ while($student = mysqli_fetch_assoc($students))
          AND date='$yesterday'"
     );
 
-    if(mysqli_num_rows($check) == 0)
-    {
+    if (mysqli_num_rows($check) == 0) {
         mysqli_query(
             $conn,
             "INSERT INTO attendance

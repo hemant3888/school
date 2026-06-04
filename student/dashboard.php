@@ -22,8 +22,9 @@ $result = mysqli_query($conn, "SELECT COUNT(*) auto_checkout_days FROM attendanc
 if($row = mysqli_fetch_assoc($result)) {
     $autoCheckoutDays = $row['auto_checkout_days'];  
 }
-$attendancePercentage =
-(($presentDays + $autoCheckoutDays) / $totalDays) * 100;
+$attendancePercentage = ($totalDays > 0)
+    ? (($presentDays + $autoCheckoutDays) / $totalDays) * 100
+    : 0;
 ?>
     <!-- ── DASHBOARD ── -->
     <div id="page-dashboard">
