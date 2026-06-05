@@ -512,7 +512,7 @@ $row = mysqli_fetch_assoc($query);
     <!-- FOOTER -->
 
     <div class="footer11">
-<h5>Center - <?php echo $row['center_name']; ?></h5>
+<h5>Centre - <?php echo $row['center_name']; ?></h5>
        
 
     </div>

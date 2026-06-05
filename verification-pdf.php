@@ -169,6 +169,10 @@ $row = mysqli_fetch_assoc($query);
                         <td><?php echo $row['enroll_no']; ?></td>
                     </tr>
                     <tr>
+                        <th>Roll No</th>
+                        <td><?php echo $row['roll_no']; ?></td>
+                    </tr>
+                    <tr>
                         <th>Student Name</th>
                         <td><?php echo $row['stu_name']; ?></td>
                     </tr>
@@ -202,22 +206,11 @@ $row = mysqli_fetch_assoc($query);
                         <td><?php echo $row['session']; ?></td>
                     </tr>
                     <tr>
-                        <th>Center</th>
+                        <th>Study Centre</th>
                         <td><?php echo $row['center_name']; ?></td>
                     </tr>
 
-                    <tr>
-                        <th>Status</th>
-                        <td>
-
-                            <span class="badge bg-success">
-
-                                VERIFIED
-
-                            </span>
-
-                        </td>
-                    </tr>
+                  
 
                 </table>
 

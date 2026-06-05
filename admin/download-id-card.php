@@ -215,7 +215,7 @@ $row = mysqli_fetch_assoc($query);
 
             padding:5px 0;
 
-            font-size:20px;
+            font-size:16px;
 
         }
 
@@ -374,7 +374,7 @@ $row = mysqli_fetch_assoc($query);
 
             <div class="adm">
 
-                Enroll. No.
+                Enroll No :
                 <?php echo $row['enroll_no']; ?>
 
             </div>
@@ -460,6 +460,21 @@ $row = mysqli_fetch_assoc($query);
 
                     <td>
                         <?php echo $row['mobile']; ?>
+                    </td>
+
+                </tr>
+                <tr>
+
+                    <td class="label">
+                        Session
+                    </td>
+
+                    <td class="colon">
+                        :
+                    </td>
+
+                    <td>
+                        <?php echo $row['session']; ?>
                     </td>
 
                 </tr>

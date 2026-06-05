@@ -187,7 +187,7 @@ if (isset($_POST['student_id'])) {
 
             font-weight: bold;
 
-            width: 150px;
+            width: 113px;
 
         }
 
